@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Performs database updates and uninstallation cleanup for the Geo-city module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function geo_city_install() {
+  db_update('system')
+    ->fields(['weight' => 100])
+    ->condition('type', 'module')
+    ->condition('name', 'geo_city')
+    ->execute();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function geo_city_uninstall() {
+  cache_clear_all('geo_city', 'cache', TRUE);
+  menu_rebuild();
+}

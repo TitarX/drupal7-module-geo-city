@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Geo-city
+ */
+
+include_once(drupal_get_path('module', 'geo_city') . '/geo/' . 'SxGeo.php');
+
+function get_city() {
+  $sxGeo = new SxGeo(
+    drupal_get_path('module', 'geo_city') . '/geo/' . 'SxGeoCity.dat'
+  );
+  $cityFull = $sxGeo->getCityFull($_SERVER['REMOTE_ADDR']);
+  return $cityFull['city']['name_ru'];
+}
